@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="flaticon.ico" rel="icon">
-    <title>LeChamois Website</title>
+    <title>LeChamois Photography</title>
     <style>
         :root {
             --beige: #f5f0e1;
@@ -34,8 +34,18 @@
         }
         
         header {
-            padding: 2rem 0;
-            position: relative;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background-color: var(--beige);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 1rem 0;
         }
         
         .logo {
@@ -104,76 +114,147 @@
             width: 100%;
         }
         
-        .hero {
-            height: 80vh;
+        /* Menu mobile */
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            float: right;
+            padding: 10px;
+        }
+        
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--brown);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        /* Carousel Section */
+        .carousel-section {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: 75px;
+        }
+        
+        .carousel-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background-size: cover;
+            background-position: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        
+        .carousel-content {
             position: relative;
-            overflow: hidden;
+            z-index: 2;
+            color: white;
+            max-width: 800px;
+            padding: 0 2rem;
         }
         
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            background-color: var(--beige-dark);
-            opacity: 0.5;
-            top: -250px;
-            left: -250px;
-            z-index: -1;
-            animation: float 15s infinite ease-in-out;
-        }
-        
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background-color: var(--beige-dark);
-            opacity: 0.3;
-            bottom: -150px;
-            right: -150px;
-            z-index: -1;
-            animation: float 12s infinite ease-in-out reverse;
-        }
-        
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(50px, 50px); }
-            100% { transform: translate(0, 0); }
-        }
-        
-        .hero h1 {
+        .carousel-content h1 {
             font-size: 3.5rem;
             font-weight: 700;
-            color: var(--brown);
             margin-bottom: 1rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.3s;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
         }
         
-        .hero p {
+        .carousel-content p {
             font-size: 1.2rem;
-            max-width: 600px;
             margin-bottom: 2rem;
-            color: var(--text);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.6s;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
         }
         
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .carousel-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-indicator.active {
+            background-color: white;
+        }
+        
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            background-color: rgba(107, 83, 64, 0.6);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .carousel-prev {
+            left: 30px;
+        }
+
+        .carousel-next {
+            right: 30px;
+        }
+
+        .carousel-prev:hover, .carousel-next:hover {
+            background-color: var(--brown);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-prev i, .carousel-next i {
+            font-size: 1.2rem;
         }
         
         .btn {
@@ -185,15 +266,23 @@
             border-radius: 30px;
             font-weight: 500;
             transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.9s;
+            border: 2px solid transparent;
         }
         
         .btn:hover {
             background-color: var(--brown-light);
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(107, 83, 64, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--brown);
         }
         
         .section {
@@ -209,6 +298,14 @@
             text-align: center;
         }
         
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: var(--text);
+        }
+        
         .about {
             background-color: white;
             border-radius: 10px;
@@ -217,6 +314,10 @@
             transform: translateY(50px);
             opacity: 0;
             transition: all 0.8s ease;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
         }
         
         .about.visible {
@@ -224,67 +325,63 @@
             opacity: 1;
         }
         
-        .links-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 3rem;
+        .about-text {
+            flex: 1;
+            min-width: 300px;
         }
         
-        .link-card {
-            background-color: white;
+        .about-image {
+            flex: 1;
+            min-width: 300px;
             border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            transform: translateY(50px);
-            opacity: 0;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .link-card.visible {
-            transform: translateY(0);
-            opacity: 1;
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
         }
         
-        .link-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        .about-image:hover img {
+            transform: scale(1.05);
         }
         
-        .link-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--brown);
+        /* Portfolio Categories */
+        .portfolio-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 2rem;
         }
         
-        .link-card p {
-            margin-bottom: 1.5rem;
-            color: var(--text);
-        }
-        
-        .link-btn {
-            display: inline-block;
+        .category-btn {
             padding: 8px 20px;
-            background-color: var(--beige-dark);
+            background-color: var(--beige);
             color: var(--brown);
-            text-decoration: none;
+            border: none;
             border-radius: 20px;
-            font-weight: 500;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
         
-        .link-btn:hover {
+        .category-btn:hover {
+            background-color: var(--beige-dark);
+        }
+        
+        .category-btn.active {
             background-color: var(--brown);
             color: white;
         }
         
-        /* Nouvelle galerie photo */
+        /* Galerie de photos améliorée */
         .gallery-section {
-            background-color: var(--beige-dark);
             border-radius: 10px;
             padding: 3rem;
-            margin-top: 5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-top: 3rem;
             transform: translateY(50px);
             opacity: 0;
             transition: all 0.8s ease;
@@ -297,7 +394,7 @@
         
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
             margin-top: 2rem;
         }
@@ -307,7 +404,7 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             position: relative;
-            height: 200px;
+            height: 250px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -333,8 +430,8 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            padding: 10px;
-            background: rgba(107, 83, 64, 0.8);
+            padding: 15px;
+            background: rgba(107, 83, 64, 0.85);
             color: white;
             transform: translateY(100%);
             transition: transform 0.3s ease;
@@ -344,7 +441,26 @@
             transform: translateY(0);
         }
         
-        /* Modal d'image agrandie */
+        .gallery-caption h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .gallery-caption p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .gallery-caption .category {
+            display: inline-block;
+            padding: 3px 8px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+        
+        /* Modal d'image amélioré */
         .image-modal {
             display: none;
             position: fixed;
@@ -352,17 +468,56 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .image-modal.visible {
+            opacity: 1;
         }
         
         .modal-content {
             max-width: 90%;
-            max-height: 90%;
+            max-height: 85%;
             object-fit: contain;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-modal.visible .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .modal-controls button {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-controls button:hover {
+            background-color: rgba(255, 255, 255, 0.4);
         }
         
         .close-modal {
@@ -373,230 +528,725 @@
             font-size: 2rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
         }
         
         .close-modal:hover {
-            transform: scale(1.2);
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+        
+        .modal-caption {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .modal-caption h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .modal-caption p {
+            opacity: 0.8;
+        }
+        
+        /* Section contact */
+        .contact-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-top: 3rem;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+        
+        .contact-section.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--brown);
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--brown-light);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(156, 126, 83, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
         }
         
         footer {
             background-color: var(--brown);
             color: white;
-            padding: 2rem 0;
-            text-align: center;
+            padding: 3rem 0;
             margin-top: 5rem;
         }
         
-        footer p {
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--beige-dark);
+        }
+        
+        .footer-column p {
+            margin-bottom: 1rem;
             opacity: 0.8;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--beige-dark);
+            color: var(--brown);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-bottom p {
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 992px) {
+            .carousel-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
         }
         
         @media (max-width: 768px) {
             header {
                 text-align: center;
+                padding: 1rem 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
             }
             
             nav {
                 float: none;
-                margin-top: 1rem;
+                display: none;
+                width: 100%;
+                margin-top: 1.5rem;
+                overflow: hidden;
+                max-height: 0;
+                transition: max-height 0.5s ease;
+            }
+            
+            nav.active {
+                display: block;
+                max-height: 300px;
             }
             
             nav ul {
-                justify-content: center;
+                flex-direction: column;
+                align-items: center;
             }
             
             nav ul li {
-                margin: 0 1rem;
+                margin: 10px 0;
+                width: 100%;
+                text-align: center;
             }
             
-            .hero h1 {
-                font-size: 2.5rem;
+            .carousel-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .carousel-content p {
+                font-size: 1rem;
+            }
+            
+            .carousel-prev, .carousel-next {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
             }
             
             .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .carousel-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about, .gallery-section, .contact-section {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
+    <header id="header">
         <div class="container">
-            <a href="#" class="logo">LeChamois</a>
-            <nav>
+            <a href="#" class="logo">LeChamois Photography</a>
+            
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav id="mainNav">
                 <ul>
+                    <li><a href="#carousel">Accueil</a></li>
                     <li><a href="#about">À propos</a></li>
-                    <li><a href="#links">Projets</a></li>
-                    <li><a href="#gallery">Galerie</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="hero">
-        <h1>LeChamois Website</h1>
-        <p>Passionné de photographie par drone et au sol, et de science. Bienvenue sur mon site.</p>
-        <a href="#about" class="btn">Découvrir</a>
+    <section id="carousel" class="carousel-section">
+        <div class="carousel-container">
+            <div class="carousel-slide active" style="background-image: url('pics/Corse.JPG')">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <h1>Capturant des moments à couper le souffle</h1>
+                    <p>Explorez le monde vu d'en haut à travers mes photographies aériennes</p>
+                    <a href="#portfolio" class="btn btn-outline">Découvrir mon portfolio</a>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('pics/Calvi.JPG')">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <h1>Paysages aériens spectaculaires</h1>
+                    <p>Des perspectives uniques qui révèlent la beauté de notre environnement</p>
+                    <a href="#portfolio" class="btn btn-outline">Explorer mes photos</a>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('pics/Moineau.JPG')">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <h1>La magie de la faune</h1>
+                    <p>Des instants de vie saisis avec précision et sensibilité</p>
+                    <a href="#portfolio" class="btn btn-outline">Voir la galerie</a>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('pics/Squirell.JPG')">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <h1>L'art de l'instant présent</h1>
+                    <p>Des moments fugaces de la nature capturés avec patience et précision</p>
+                    <a href="#portfolio" class="btn btn-outline">Explorer la galerie</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="carousel-prev"><i class="fas fa-chevron-left"></i></div>
+        <div class="carousel-next"><i class="fas fa-chevron-right"></i></div>
+        
+        <div class="carousel-nav">
+            <div class="carousel-indicator active"></div>
+            <div class="carousel-indicator"></div>
+            <div class="carousel-indicator"></div>
+            <div class="carousel-indicator"></div>
+        </div>
     </section>
 
     <section id="about" class="section">
         <div class="container">
             <h2 class="section-title">À propos</h2>
             <div class="about">
-                <p>Bienvenue sur mon site personnel. Je suis un passionné de photographie et de vidéo par drone et au sol, explorant les paysages sous des angles uniques et capturant la beauté de notre monde vu du ciel.</p>
-                <p>En parallèle, je m'intéresse à la science et développe des projets , notamment des simulations numériques qui permettent de modéliser et de comprendre des phénomènes complexes.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="links" class="section">
-        <div class="container">
-            <h2 class="section-title">Mes projets</h2>
-            <div class="links-container">
-                <div class="link-card">
-                    <h3>SkyPeaks Drone</h3>
-                    <p>Découvrez mes prestations de photographie et vidéo aérienne par drone.</p>
-                    <a href="https://skypeaks.github.io" target="_blank" class="link-btn">Visiter</a>
+                <div class="about-text">
+                    <p>Bienvenue dans mon univers photographique. Je suis passionné par la capture d'images uniques qui racontent une histoire, que ce soit vu du ciel ou au ras du sol.</p>
+                    <p>Spécialisé dans la photographie aérienne par drone, j'explore des perspectives nouvelles et des angles inédits pour révéler la beauté cachée des paysages, de l'architecture et de la nature.</p>
+                    <p>Mon approche combine technique et sensibilité artistique, cherchant toujours à capturer l'émotion et l'essence des sujets que je photographie.</p>
+                    <p>Chaque cliché est le fruit d'une recherche minutieuse de la lumière parfaite, de la composition idéale et du moment décisif qui transforme une simple image en une œuvre évocatrice.</p>
                 </div>
-                <div class="link-card">
-                    <h3>GitHub</h3>
-                    <p>Explorez mes projets de programmation et simulations scientifiques et autres. (Projets en cours ...)</p>
-                    <a href="https://github.com/LeChamois" target="_blank" class="link-btn">Explorer</a>
+                <div class="about-image">
+                    <img src="pics/Salers.JPG" alt="Photographie de paysage">
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="gallery" class="section">
+    <section id="portfolio" class="section">
         <div class="container">
-            <h2 class="section-title">Galerie Photo</h2>
+            <h2 class="section-title">Portfolio</h2>
+            <p class="section-subtitle">Découvrez une sélection de mes meilleures photographies, capturant la beauté et les émotions à travers différentes perspectives.</p>
+            
+            <div class="portfolio-categories">
+                <button class="category-btn active" data-category="all">Tous</button>
+                <button class="category-btn" data-category="aerien">Vues aériennes</button>
+                <button class="category-btn" data-category="paysage">Paysages</button>
+                <button class="category-btn" data-category="faune">Faune</button>
+            </div>
+            
             <div class="gallery-section">
-                <p>Voici une sélection de mes meilleures photographies, principalement capturées par drone. Chaque image raconte une histoire et offre une perspective unique sur notre environnement.</p>
-                
                 <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="pics/Corse.JPG" alt="Vue aérienne d'une montagne" class="gallery-image">
-                        <div class="gallery-caption">Sommets du nord de la Corse (Monte Padro).</div>
+                    <div class="gallery-item" data-category="aerien">
+                        <img src="pics/Corse.JPG" alt="Montagnes de Corse vues du ciel" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h3>Sommets Corses</h3>
+                            <p>Vue aérienne des sommets du nord de la Corse (Monte Padro).</p>
+                            <span class="category">Aérien</span>
+                        </div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="pics/Moineau.JPG" alt="Moineau" class="gallery-image">
-                        <div class="gallery-caption">Petit moineau mâle au repos sur un arbre.</div>
+                    <div class="gallery-item" data-category="faune">
+                        <img src="pics/Moineau.JPG" alt="Moineau sur une branche" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h3>Le Gardien du Matin</h3>
+                            <p>Petit moineau mâle au repos sur un arbre, capturé au lever du soleil.</p>
+                            <span class="category">Faune</span>
+                        </div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="pics/Calvi.JPG" alt="Calvi" class="gallery-image">
-                        <div class="gallery-caption">Photo aérienne de Calvi.</div>
+                    <div class="gallery-item" data-category="aerien">
+                        <img src="pics/Calvi.JPG" alt="Vue aérienne de Calvi" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h3>Calvi Vue du Ciel</h3>
+                            <p>Photo aérienne de la ville de Calvi et sa magnifique baie.</p>
+                            <span class="category">Aérien</span>
+                        </div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="pics/Salers.JPG" alt="Salers au coucher de soleil" class="gallery-image">
-                        <div class="gallery-caption">Une salers au coucher de soleil</div>
+                    <div class="gallery-item" data-category="faune">
+                        <img src="pics/Salers.JPG" alt="Vache Salers au coucher de soleil" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h3>Crépuscule Pastoral</h3>
+                            <p>Une vache de race Salers dans la lumière dorée du coucher de soleil.</p>
+                            <span class="category">Faune</span>
+                        </div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="pics/Alpes.JPG" alt="Alpes dans le brouillard" class="gallery-image">
-                        <div class="gallery-caption">Photo lointaine des Alpes</div>
+                    <div class="gallery-item" data-category="paysage">
+                        <img src="pics/Alpes.JPG" alt="Montagnes des Alpes dans la brume" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h3>Alpes Voilées</h3>
+                            <p>Vue lointaine des Alpes émergeant d'une mer de nuages.</p>
+                            <span class="category">Paysage</span>
+                        </div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="pics/Lune.JPG" alt="Lune" class="gallery-image">
-                        <div class="gallery-caption">Photo de la Lune au coucher de soleil</div>
+                    <div class="gallery-item" data-category="paysage">
+                        <img src="pics/Lune.JPG" alt="La Lune au crépuscule" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h3>Lune Crépusculaire</h3>
+                            <p>La Lune se dévoilant dans le ciel du soir lors du coucher de soleil.</p>
+                            <span class="category">Paysage</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="faune">
+                        <img src="pics/Squirell.JPG" alt="Écureuil dans la nature" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h3>Instant Furtif</h3>
+                            <p>Un instant magique capturé en coup de vent avec cet écureuil.</p>
+                            <span class="category">Faune</span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="faune">
+                        <img src="pics/Pie.JPG" alt="Pie perchée sur un arbre" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h3>Sentinelle du Crépuscule</h3>
+                            <p>Une pie élégante perchée sur une branche, contemplant le paysage au coucher du soleil.</p>
+                            <span class="category">Faune</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="paysage">
+                        <img src="pics/CanaryWharf.JPG" alt="Canary Wharf de nuit" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h3>Londres Illuminée</h3>
+                            <p>Le quartier d'affaires de Canary Wharf vu depuis Greenwich, baigné dans les lumières nocturnes.</p>
+                            <span class="category">Paysage</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <p class="section-subtitle">Intéressé par mes services photographiques ou souhaitez-vous en savoir plus sur mon travail ? N'hésitez pas à me contacter.</p>
+    
+            <div class="contact-section">
+                <form class="contact-form" action="https://formspree.io/f/xkgjwlye" method="POST">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Nom</label>
+                        <input type="text" name="name" id="name" class="form-control" placeholder="Votre nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Votre adresse e-mail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea name="message" id="message" class="form-control" placeholder="Votre message" required></textarea>
+                    </div>
+                    <input type="text" name="_gotcha" style="display:none;" autocomplete="off">
+    
+                    <button type="submit" class="btn">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LeChamois Photography</h3>
+                    <p>Capturant la beauté du monde à travers l'objectif, des vues aériennes extraordinaires aux détails subtils de la nature.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/LeChamois" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <p><a href="#carousel" style="color: white; text-decoration: none;">Accueil</a></p>
+                    <p><a href="#about" style="color: white; text-decoration: none;">À propos</a></p>
+                    <p><a href="#portfolio" style="color: white; text-decoration: none;">Portfolio</a></p>
+                    <p><a href="#contact" style="color: white; text-decoration: none;">Contact</a></p>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <p><a href="#contact" style="color: white; text-decoration: none;">Contact</a></p>
+                    <p>Basé en France</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LeChamois Photography. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Modal pour afficher les images en grand -->
     <div class="image-modal" id="imageModal">
         <span class="close-modal">&times;</span>
-        <img class="modal-content" id="expandedImage">
+        <img class="modal-content" id="modalImage">
+        <div class="modal-caption">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDescription"></p>
+        </div>
+        <div class="modal-controls">
+            <button id="prevImage">&lt;</button>
+            <button id="nextImage">&gt;</button>
+        </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 LeChamois Website. Tous droits réservés.</p>
-        </div>
-    </footer>
-
+    <!-- Scripts JavaScript -->
     <script>
-        // Animation des sections au scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const observerOptions = {
-                threshold: 0.1
-            };
+        // Gestion du menu mobile
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
             
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+            // Animer l'icône hamburger en X
+            const spans = this.querySelectorAll('span');
+            spans.forEach(span => span.classList.toggle('active'));
+        });
+        
+        // Effet de scroll sur le header
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Carousel automatique
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        const prevBtn = document.querySelector('.carousel-prev');
+        const nextBtn = document.querySelector('.carousel-next');
+        let currentSlide = 0;
+        let slideInterval;
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            currentSlide = (n + slides.length) % slides.length;
+            
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+        
+        // Démarrer le carousel automatique
+        function startSlideInterval() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+        
+        // Événements pour les boutons précédent/suivant
+        prevBtn.addEventListener('click', function() {
+            prevSlide();
+            clearInterval(slideInterval);
+            startSlideInterval();
+        });
+        
+        nextBtn.addEventListener('click', function() {
+            nextSlide();
+            clearInterval(slideInterval);
+            startSlideInterval();
+        });
+        
+        // Événements pour les indicateurs
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', function() {
+                showSlide(index);
+                clearInterval(slideInterval);
+                startSlideInterval();
+            });
+        });
+        
+        // Démarrer le carousel
+        startSlideInterval();
+        
+        // Filtrage du portfolio
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                
+                // Activer le bouton sélectionné
+                categoryBtns.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filtrer les éléments de la galerie
+                galleryItems.forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
                     }
-                });
-            }, observerOptions);
-            
-            const sections = document.querySelectorAll('.about, .link-card, .gallery-section');
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-            
-            // Animation des link-cards avec délai
-            const linkCards = document.querySelectorAll('.link-card');
-            linkCards.forEach((card, index) => {
-                card.style.transitionDelay = `${0.1 * index}s`;
-            });
-            
-            // Smooth scroll
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // Modal pour les images de la galerie
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('expandedImage');
-            const closeModal = document.getElementsByClassName('close-modal')[0];
-            
-            // Ouvrir le modal au clic sur une image
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const img = this.querySelector('.gallery-image');
-                    modal.style.display = 'flex';
-                    modalImg.src = img.src;
-                });
-            });
-            
-            // Fermer le modal au clic sur le X
-            closeModal.addEventListener('click', function() {
-                modal.style.display = 'none';
-            });
-            
-            // Fermer le modal au clic n'importe où
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-            
-            // Animations supplémentaires pour améliorer l'expérience utilisateur
-            document.querySelectorAll('.btn, .link-btn').forEach(btn => {
-                btn.addEventListener('mousedown', function() {
-                    this.style.transform = 'scale(0.95)';
-                });
-                
-                btn.addEventListener('mouseup', function() {
-                    this.style.transform = '';
-                });
-                
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
                 });
             });
         });
+        
+        // Modal d'image
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDescription');
+        const closeModal = document.querySelector('.close-modal');
+        const prevImgBtn = document.getElementById('prevImage');
+        const nextImgBtn = document.getElementById('nextImage');
+        let currentImgIndex = 0;
+        let filteredItems = [];
+        
+        // Ouvrir la modal lors du clic sur une image
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', function() {
+                // Mettre à jour les items filtrés (visibles)
+                filteredItems = Array.from(galleryItems).filter(item => item.style.display !== 'none');
+                
+                // Trouver l'index de l'item cliqué parmi les items filtrés
+                const filteredIndex = filteredItems.indexOf(this);
+                currentImgIndex = filteredIndex;
+                
+                const img = this.querySelector('.gallery-image');
+                const caption = this.querySelector('.gallery-caption h3');
+                const desc = this.querySelector('.gallery-caption p');
+                
+                modalImg.src = img.src;
+                modalTitle.textContent = caption.textContent;
+                modalDesc.textContent = desc.textContent;
+                
+                modal.style.display = 'flex';
+                setTimeout(() => {
+                    modal.classList.add('visible');
+                }, 10);
+            });
+        });
+        
+        // Fermer la modal
+        closeModal.addEventListener('click', function() {
+            modal.classList.remove('visible');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        });
+        
+        // Navigation dans la modal
+        prevImgBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navigateModal(-1);
+        });
+        
+        nextImgBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navigateModal(1);
+        });
+        
+        function navigateModal(direction) {
+            currentImgIndex = (currentImgIndex + direction + filteredItems.length) % filteredItems.length;
+            const item = filteredItems[currentImgIndex];
+            
+            const img = item.querySelector('.gallery-image');
+            const caption = item.querySelector('.gallery-caption h3');
+            const desc = item.querySelector('.gallery-caption p');
+            
+            modalImg.classList.remove('visible');
+            setTimeout(() => {
+                modalImg.src = img.src;
+                modalTitle.textContent = caption.textContent;
+                modalDesc.textContent = desc.textContent;
+                
+                setTimeout(() => {
+                    modalImg.classList.add('visible');
+                }, 10);
+            }, 300);
+        }
+        
+        // Animation au scroll
+        window.addEventListener('scroll', function() {
+            const about = document.querySelector('.about');
+            const gallery = document.querySelector('.gallery-section');
+            const contact = document.querySelector('.contact-section');
+            
+            const triggerOffset = window.innerHeight * 0.8;
+            
+            if (about.getBoundingClientRect().top < triggerOffset) {
+                about.classList.add('visible');
+            }
+            
+            if (gallery.getBoundingClientRect().top < triggerOffset) {
+                gallery.classList.add('visible');
+            }
+            
+            if (contact.getBoundingClientRect().top < triggerOffset) {
+                contact.classList.add('visible');
+            }
+        });
+        
+        // Ajout d'un lien pour le formulaire
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simuler l'envoi du formulaire
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Envoi en cours...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.');
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
     </script>
+
+    <!-- Ajout des icônes Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
 </body>
 </html>
