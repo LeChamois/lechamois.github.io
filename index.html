@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="flaticon.ico" rel="icon">
+    <link href="chamois-icon.png" rel="icon">
     <title>LeChamois Photography</title>
     <style>
         :root {
@@ -49,86 +49,127 @@
         }
         
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.8rem; /* Ajustement de la taille */
             font-weight: 700;
             color: var(--brown);
             text-decoration: none;
             display: inline-block;
             position: relative;
             overflow: hidden;
+            transition: color 0.3s ease;
         }
-        
+
+        .logo:hover {
+            color: var(--brown-light);
+        }
+
         .logo::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
+            bottom: -3px;
+            left: 50%;
             width: 0;
             height: 2px;
             background-color: var(--brown-light);
-            transition: width 0.5s ease;
+            transition: width 0.4s ease, left 0.4s ease;
         }
-        
+
         .logo:hover::after {
             width: 100%;
+            left: 0;
         }
         
+        /* Style du menu de navigation */
         nav {
             float: right;
+            display: flex;
+            align-items: center;
         }
-        
+
         nav ul {
             list-style: none;
             display: flex;
+            gap: 25px; /* Espacement amélioré */
+            padding: 0;
+            margin: 0;
         }
-        
+
         nav ul li {
-            margin-left: 2rem;
+            position: relative;
         }
-        
+
         nav ul li a {
             color: var(--brown);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 8px 12px;
             position: relative;
-            padding-bottom: 5px;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease, transform 0.2s ease;
         }
-        
+
+        /* Effet de survol : couleur et soulignement fluide */
         nav ul li a::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
+            bottom: -4px;
+            left: 50%;
             width: 0;
-            height: 2px;
+            height: 3px;
             background-color: var(--brown-light);
-            transition: width 0.3s ease;
+            transition: width 0.3s ease, left 0.3s ease;
         }
-        
+
         nav ul li a:hover {
             color: var(--brown-light);
+            transform: scale(1.05); /* Légère mise en avant */
         }
-        
+
         nav ul li a:hover::after {
             width: 100%;
+            left: 0;
+        }
+
+        /* Effet pour indiquer la page active */
+        nav ul li a.active {
+            color: var(--brown-light);
+        }
+
+        nav ul li a.active::after {
+            width: 100%;
+            left: 0;
         }
         
-        /* Menu mobile */
+        /* Bouton burger */
         .mobile-menu-btn {
             display: none;
             cursor: pointer;
             float: right;
             padding: 10px;
+            z-index: 200; /* Toujours au-dessus du menu */
+            position: relative;
         }
-        
+
         .mobile-menu-btn span {
             display: block;
-            width: 25px;
+            width: 30px;
             height: 3px;
             background-color: var(--brown);
-            margin: 5px 0;
+            margin: 6px 0;
             transition: all 0.3s ease;
+        }
+
+        /* Animation du bouton burger */
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
         }
         
         /* Carousel Section */
@@ -493,7 +534,18 @@
         .image-modal.visible .modal-content {
             transform: scale(1);
         }
-        
+        .logo-icon {
+            width: 65px; /* Taille ajustée */
+            height: 65px;
+            margin-right: 12px;
+            vertical-align: middle;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(8deg) scale(1.05);
+            filter: brightness(1.1);
+        }
         .modal-controls {
             position: absolute;
             bottom: 20px;
@@ -709,29 +761,30 @@
             }
             
             nav {
-                float: none;
-                display: none;
+                display: none; /* Masquer le menu sur mobile */
                 width: 100%;
-                margin-top: 1.5rem;
-                overflow: hidden;
-                max-height: 0;
-                transition: max-height 0.5s ease;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: var(--beige);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                padding: 15px 0;
+                transition: all 0.3s ease;
             }
             
             nav.active {
                 display: block;
-                max-height: 300px;
             }
-            
+
             nav ul {
                 flex-direction: column;
-                align-items: center;
+                gap: 15px;
             }
-            
-            nav ul li {
-                margin: 10px 0;
-                width: 100%;
-                text-align: center;
+
+            nav ul li a {
+                display: block;
+                padding: 12px 0;
             }
             
             .carousel-content h1 {
@@ -779,7 +832,10 @@
 <body>
     <header id="header">
         <div class="container">
-            <a href="#" class="logo">LeChamois Photography</a>
+            <a href="#" class="logo">
+                <img src="chamois.png" alt="Logo Chamois" class="logo-icon">
+                LeChamois Photography
+            </a>
             
             <div class="mobile-menu-btn" id="mobileMenuBtn">
                 <span></span>
@@ -961,7 +1017,7 @@
             <p class="section-subtitle">Intéressé par mes services photographiques ou souhaitez-vous en savoir plus sur mon travail ? N'hésitez pas à me contacter.</p>
     
             <div class="contact-section">
-                <form class="contact-form" action="https://formspree.io/f/xkgjwlye" method="POST" id="contact-form">
+                <form class="contact-form" action="https://formspree.io/f/xkgjwlye" method="post" id="contact-form">
                     <div class="form-group">
                         <label for="name" class="form-label">Nom</label>
                         <input type="text" name="name" id="name" class="form-control" placeholder="Votre nom" required>
