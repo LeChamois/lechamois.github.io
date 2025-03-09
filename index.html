@@ -1017,7 +1017,7 @@
             <p class="section-subtitle">Intéressé par mes services photographiques ou souhaitez-vous en savoir plus sur mon travail ? N'hésitez pas à me contacter.</p>
     
             <div class="contact-section">
-                <form class="contact-form" action="https://formspree.io/f/xkgjwlye" method="post" id="contact-form">
+                <form class="contact-form" action="https://formspree.io/f/xkgjwlye" method="POST">
                     <div class="form-group">
                         <label for="name" class="form-label">Nom</label>
                         <input type="text" name="name" id="name" class="form-control" placeholder="Votre nom" required>
@@ -1030,15 +1030,11 @@
                         <label for="message" class="form-label">Message</label>
                         <textarea name="message" id="message" class="form-control" placeholder="Votre message" required></textarea>
                     </div>
+                    <!-- Honeypot field pour filtrer les spams -->
                     <input type="text" name="_gotcha" style="display:none;" autocomplete="off">
     
                     <button type="submit" class="btn">Envoyer</button>
                 </form>
-    
-                <!-- Espace pour afficher l'erreur -->
-                <div id="form-error" style="color: red; display: none; margin-top: 10px;">
-                    <p>Une erreur est survenue lors de l'envoi du formulaire. Veuillez réessayer plus tard.</p>
-                </div>
             </div>
         </div>
     </section>
@@ -1089,39 +1085,6 @@
 
     <!-- Scripts JavaScript -->
     <script>
-        // Ajout d'un gestionnaire d'événements pour la soumission du formulaire
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Empêche la soumission du formulaire par défaut
-
-            // Effectuer la soumission via fetch
-            fetch("https://formspree.io/f/xkgjwlye", {
-                method: "POST",
-                headers: {
-                    "Accept": "application/json"
-                },
-                body: new FormData(this)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Erreur de soumission du formulaire.");
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    alert("Formulaire soumis avec succès !");
-                    // Réinitialiser le formulaire en cas de succès
-                    document.getElementById('contact-form').reset();
-                } else {
-                    throw new Error("Une erreur est survenue. Veuillez réessayer.");
-                }
-            })
-            .catch(error => {
-                // Affichage de l'erreur sur la page
-                document.getElementById('form-error').style.display = 'block';
-                console.error(error);
-            });
-        });
         // Gestion du menu mobile
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mainNav = document.getElementById('mainNav');
@@ -1317,25 +1280,6 @@
             if (contact.getBoundingClientRect().top < triggerOffset) {
                 contact.classList.add('visible');
             }
-        });
-        
-        // Ajout d'un lien pour le formulaire
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Simuler l'envoi du formulaire
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'Envoi en cours...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                alert('Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.');
-                this.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 1500);
         });
     </script>
 
