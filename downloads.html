@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeChamoisDev - Projets & Téléchargements</title>
+    <link rel="stylesheet" href="res/css/downloads.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header et Navigation -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="chamois.png" alt="LeChamoisDev Logo" class="logo-icon">
+                LeChamoisDev
+            </a>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#accueil" class="active">Accueil</a></li>
+                    <li><a href="#projets">Projets</a></li>
+                    <li><a href="#a-propos">À propos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Des applications utiles et faciles à utiliser</h1>
+                <p>Développé avec passion par LeChamoisDev</p>
+                <a href="#projets" class="btn-primary">
+                    <i class="fas fa-arrow-down"></i> Découvrir mes projets
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projets -->
+    <section id="projets" class="section">
+        <div class="container">
+            <h2 class="section-title">Mes Projets</h2>
+            <p class="section-subtitle">Découvrez les outils que j'ai développés pour simplifier votre vie numérique</p>
+            
+            <div class="projects-grid">
+                <!-- Projet Ready -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="res/ready.png" alt="Ready OCR">
+                    </div>
+                    <div class="project-content">
+                        <h3>Ready - Reconnaissance de Texte</h3>
+                        <p class="project-description">
+                            Application de reconnaissance de texte basée sur Tesseract OCR et PyQt5. Extrayez facilement du texte à partir d'images avec des options avancées.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">PyQt5</span>
+                            <span class="tech-tag">Tesseract OCR</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#ready-details" class="btn-secondary btn-details">
+                                <i class="fas fa-info-circle"></i> Détails
+                            </a>
+                            <a href="res/downloads/Ready.exe" class="btn-primary btn-download">
+                                <i class="fas fa-download"></i> Télécharger
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet Futur (placeholder) -->
+                <div class="project-card coming-soon">
+                    <div class="project-image">
+                        <div class="coming-soon-overlay">
+                            <span>Bientôt disponible</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Nouveau projet en développement</h3>
+                        <p class="project-description">
+                            Un nouveau projet est en cours de développement. Restez à l'écoute pour plus d'informations.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">?</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Détails des projets -->
+    <section id="projets-details" class="section bg-light">
+        <div class="container">
+            <!-- Ready Details -->
+            <div id="ready-details" class="project-details">
+                <h2 class="section-title">Ready - Reconnaissance de Texte</h2>
+                
+                <div class="content-tabs">
+                    <button class="tab-button active" data-tab="description">Description</button>
+                    <button class="tab-button" data-tab="installation">Installation</button>
+                    <button class="tab-button" data-tab="utilisation">Utilisation</button>
+                    <button class="tab-button" data-tab="fonctionnalites">Fonctionnalités</button>
+                </div>
+                
+                <div class="tab-content">
+                    <!-- Description Tab -->
+                    <div id="description" class="tab-pane active">
+                        <div class="content-block visible">
+                            <div class="two-columns">
+                                <div class="column">
+                                    <h3>Qu'est-ce que Ready?</h3>
+                                    <p>Ready est une application de reconnaissance optique de caractères (OCR) conçue pour être simple et puissante. Elle vous permet d'extraire du texte à partir d'images et de documents scannés avec une précision remarquable.</p>
+                                    <p>Basée sur la technologie Tesseract OCR et développée avec PyQt5, Ready offre une interface utilisateur intuitive tout en proposant des options avancées pour les utilisateurs qui souhaitent un contrôle précis sur le processus d'extraction.</p>
+                                    <p>Que vous ayez besoin de numériser des documents, d'extraire du texte de captures d'écran ou de convertir des images en texte modifiable, Ready est l'outil qu'il vous faut.</p>
+                                </div>
+                                <div class="column">
+                                    <img src="res/ready.png" alt="Interface de Ready" class="content-image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Installation Tab -->
+                    <div id="installation" class="tab-pane">
+                        <div class="content-block visible">
+                            <h3>Installation</h3>
+                            <p>Ready est fourni sous forme d'un exécutable portable qui ne nécessite aucune installation. Il suffit de le télécharger et de l'exécuter.</p>
+                            
+                            <div class="instruction-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h4>Téléchargement</h4>
+                                        <p>Téléchargez le fichier <code>Ready.exe</code> depuis le bouton ci-dessous.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h4>Exécution</h4>
+                                        <p>Double-cliquez sur le fichier téléchargé pour lancer l'application.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h4>C'est prêt!</h4>
+                                        <p>Aucune autre étape n'est nécessaire. Ready est prêt à être utilisé immédiatement.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="download-section">
+                                <a id="download-ready" href="res/downloads/Ready.exe" class="download-btn">
+                                    <i class="fas fa-download"></i> Télécharger Ready v1.0
+                                    <span class="version-info">Windows 10/11 • 64-bit • 15MB</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Utilisation Tab -->
+                    <div id="utilisation" class="tab-pane">
+                        <div class="content-block visible">
+                            <h3>Guide d'utilisation</h3>
+                            <p>Suivez ces étapes simples pour extraire du texte de vos images avec Ready :</p>
+                            
+                            <ol class="steps-list">
+                                <li>
+                                    <strong>Lancez l'application</strong>
+                                    <p>Ouvrez <code>Ready.exe</code> en double-cliquant dessus.</p>
+                                </li>
+                                <li>
+                                    <strong>Sélectionnez une image</strong>
+                                    <p>Cliquez sur le bouton <strong>Sélectionner une image</strong> ou faites glisser-déposer une image dans l'application.</p>
+                                </li>
+                                <li>
+                                    <strong>Configurez les paramètres (optionnel)</strong>
+                                    <p>Réglez les paramètres comme la langue, le contraste, la luminosité ou le prétraitement selon vos besoins.</p>
+                                </li>
+                                <li>
+                                    <strong>Lancez l'extraction</strong>
+                                    <p>Cliquez sur <strong>Extraire le texte</strong>. Le résultat apparaîtra dans la zone de texte.</p>
+                                </li>
+                                <li>
+                                    <strong>Utilisez le résultat</strong>
+                                    <p>Vous pouvez copier le texte extrait dans le presse-papiers ou l'enregistrer dans un fichier texte.</p>
+                                </li>
+                            </ol>
+                            
+                            <div class="tips-box">
+                                <h4><i class="fas fa-lightbulb"></i> Conseils pour de meilleurs résultats</h4>
+                                <ul class="feature-list">
+                                    <li>Utilisez des images de bonne qualité avec un texte net</li>
+                                    <li>Sélectionnez la langue appropriée pour le texte contenu dans l'image</li>
+                                    <li>Ajustez le contraste si le texte est trop clair ou trop sombre</li>
+                                    <li>Pour les documents scannés, essayez l'option de redressement automatique</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fonctionnalités Tab -->
+                    <div id="fonctionnalites" class="tab-pane">
+                        <div class="content-block visible">
+                            <h3>Fonctionnalités</h3>
+                            <p>Ready offre une gamme complète de fonctionnalités pour répondre à vos besoins de reconnaissance de texte :</p>
+                            
+                            <div class="features-grid">
+                                <div class="feature-card">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-language"></i>
+                                    </div>
+                                    <h4>Support multilingue</h4>
+                                    <p>Reconnaissance de texte en français, anglais, espagnol, allemand et plusieurs autres langues.</p>
+                                </div>
+                                
+                                <div class="feature-card">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-sliders-h"></i>
+                                    </div>
+                                    <h4>Prétraitement avancé</h4>
+                                    <p>Options de filtrage, seuillage adaptatif et redressement pour améliorer la qualité de la reconnaissance.</p>
+                                </div>
+                                
+                                <div class="feature-card">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-desktop"></i>
+                                    </div>
+                                    <h4>Interface intuitive</h4>
+                                    <p>Interface graphique conviviale développée avec PyQt5 pour une expérience utilisateur fluide.</p>
+                                </div>
+                                
+                                <div class="feature-card">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-file-export"></i>
+                                    </div>
+                                    <h4>Export facile</h4>
+                                    <p>Exportez les résultats au format TXT ou copiez directement dans le presse-papiers.</p>
+                                </div>
+                                
+                                <div class="feature-card">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-feather-alt"></i>
+                                    </div>
+                                    <h4>Léger et portable</h4>
+                                    <p>Application légère et portable, ne nécessitant qu'une petite installation et pas de droits administrateur.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- À propos -->
+    <section id="a-propos" class="section">
+        <div class="container">
+            <h2 class="section-title">À propos de LeChamoisDev</h2>
+            <div class="about-content content-block visible">
+                <div class="two-columns">
+                    <div class="column">
+                        <h3>Qui suis-je?</h3>
+                        <p>Photgraphe amateur, je développe parfois quelques logiciels tels Ready pour m'aider dans mon travail ainsi que pour aider les autres.</p>
+                        <p>Je développe principalement de petit logiciel/outils pour de la bureautique.</p>
+                        
+                        <div class="tech-stack">
+                            <h4>Mes technologies préférées</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">PyQt</span>
+                                <span class="tech-tag">HTML/CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <img src="chamois.png" alt="LeChamoisDev" class="profile-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        LeChamoisDev
+                    </a>
+                    <p>Des applications utiles et faciles à utiliser</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#projets">Projets</a></li>
+                        <li><a href="#a-propos">À propos</a></li>
+                        <li><a href="index.html">Mon Site Photographie</a></li>
+                    </ul>
+                </div>
+                <div class="footer-projects">
+                    <h3>Projets</h3>
+                    <ul>
+                        <li><a href="#ready-details">Ready - OCR</a></li>
+                        <li><span class="coming-soon-text">Nouveau projet (bientôt)</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LeChamoisDev. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Effet de scroll pour le header
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Menu mobile
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('nav');
+            
+            menuBtn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            // Animation des sections au scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.content-block:not(.visible)');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            // Tabs de documentation
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Hide all tab panes
+                    const tabPanes = document.querySelectorAll('.tab-pane');
+                    tabPanes.forEach(pane => pane.classList.remove('active'));
+                    
+                    // Show selected tab pane
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Exécuter une fois au chargement
+            animateOnScroll();
+            
+            // Puis sur le scroll
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>
