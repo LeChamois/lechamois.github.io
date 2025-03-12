@@ -495,6 +495,40 @@ nav ul li a.active::after {
     align-items: flex-start;
 }
 
+/* GitHub Section */
+.github-section {
+    margin-top: 3rem;
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--beige);
+    border-radius: var(--border-radius);
+    border: 2px dashed var(--brown-light);
+}
+
+.github-section h4 {
+    color: var(--brown);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.github-btn {
+    margin-top: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #24292e; /* GitHub dark color */
+    border-color: #24292e;
+}
+
+.github-btn:hover {
+    background-color: #3a3f44;
+    border-color: #3a3f44;
+}
+
+.github-btn i {
+    font-size: 1.2rem;
+}
+
 .step-number {
     width: 40px;
     height: 40px;
